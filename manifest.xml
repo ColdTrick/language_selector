@@ -6,7 +6,7 @@
 	<field key="website" value="http://www.coldtrick.com/" />
 	<field key="copyright" value="(C) ColdTrick IT Solutions 2009" />
 	<field key="licence" value="GNU Public License version 2" />
-	<field key="elgg_version" value="2009030101" />
+	<field key="elgg_version" value="2011052801" />
 </plugin_manifest>
 <!-- 
 
@@ -34,6 +34,9 @@ TODO:
 =================
 Version History
 =================
+x.x:
+	- fixed: conflict with translation editor, causing custom translation not being loaded when loggedout
+
 1.0.5:
 	- added: triggering an event when a loggedin user changes the language
 	

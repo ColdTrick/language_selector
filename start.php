@@ -1,8 +1,11 @@
 <?php
+
 	function language_selector_plugins_boot(){
+		global $CONFIG;
+		
 		if(!isloggedin()){
 			$new_lang_id = $_COOKIE['client_language'];
-			global $CONFIG;
+			
 			if(!empty($new_lang_id)){
 				$CONFIG->language = $new_lang_id; 
 			} else {
@@ -15,13 +18,18 @@
 					}
 				}
 			}
-			reload_all_translations();
+			
+			if(is_plugin_enabled("translation_editor")){
+				translation_editor_load_translations();
+			} else {
+				reload_all_translations();
+			}
 		}
 	}
 	
 	function language_selector_init(){
 		if(get_plugin_setting("show_in_header") == "yes"){
-			extend_view("page_elements/header_contents", "language_selector/default");
+			elgg_extend_view("page_elements/header_contents", "language_selector/default");
 		}
 	}
 	
@@ -38,7 +46,8 @@
 					}
 				}
 			} 
-		}		
+		}
+		
 		return $allowed;
 	}
 	
@@ -47,5 +56,4 @@
 	register_elgg_event_handler('init', 'system', 'language_selector_init');
 	
 	// actions
-	register_action('language_selector/change', false, $CONFIG->pluginspath . 'language_selector/actions/change.php');
-?>
+	register_action('language_selector/change', false, dirname(__FILE__) . '/actions/change.php');
