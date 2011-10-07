@@ -1,8 +1,16 @@
 <?php 
-	$allowed = get_allowed_translations();
-	$current_lang_id = get_current_language();
 	global $CONFIG;
+	
+	$allowed = language_selector_get_allowed_translations();
+	$current_lang_id = get_current_language();
+	
 	if(count($allowed) > 1){
+		// show text or flags
+		$show_flags = false;
+		if(get_plugin_setting("show_images", "language_selector") == "yes"){
+			$show_flags = true;
+		}
+		
 		foreach($allowed as $lang_id => $lang_name){
 			
 			$text = "";
@@ -22,14 +30,14 @@
 			} 
 			
 			
-			if(get_plugin_setting("show_images", "language_selector") == "yes"){
+			if($show_flags){
 				
 				$flag_file = "mod/language_selector/_graphics/flags/" . $lang_id . ".gif";
 				
 				if(file_exists($CONFIG->path . $flag_file)){
-					$text = "<img src='" . $CONFIG->wwwroot . $flag_file . "' alt='" . $lang_name . "' title='" . $lang_name . "'>";
-				} 
-			} 
+					$text = "<img src='" . $vars["url"] . $flag_file . "' alt='" . $lang_name . "' title='" . $lang_name . "'>";
+				}
+			}
 			
 			if(empty($text)){
 				$text = $lang_id;
@@ -41,10 +49,9 @@
 				$result .= $text;	
 			}				
 		}
+
 		if(!isloggedin()){
-			
-			
-	?>
+?>
 		<script type="text/javascript">
 			function setLanguage(lang_id){
 				setCookie("client_language", lang_id, 30);
@@ -56,9 +63,9 @@
 				document.cookie = c_name + "=" + escape(value) + ";Path=/" + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
 			}
 		</script>
-	
-	<?php 	
+<?php 	
 		}
 	}
+	
 	echo $result;
-?>
+	
