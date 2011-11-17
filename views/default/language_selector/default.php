@@ -11,8 +11,8 @@
 			$show_flags = true;
 		}
 		
-		foreach($allowed as $lang_id => $lang_name){
-			
+		foreach($allowed as $lang_id){
+			$lang_name = elgg_echo($lang_id);
 			$text = "";
 			$action = "";
 			
@@ -28,7 +28,6 @@
 					$action = "javascript:setLanguage(\"" . $lang_id . "\");";
 				}				
 			} 
-			
 			
 			if($show_flags){
 				

@@ -37,15 +37,40 @@
 		}
 	}
 	
+	function language_selector_actions_hook($hook_name, $entity_type, $return_value, $parameters){
+		clear_plugin_setting("allowed_languages", "language_selector");
+	}
+	
+	function language_selector_language_merge_event($event, $object_type, $object){
+		clear_plugin_setting("allowed_languages", "language_selector");
+	}
+	
+	function language_selector_init(){	
+		if(defined("upgrading") && (upgrading == "upgrading")){
+			language_selector_actions_hook();
+		}
+	}
+	
 	function language_selector_pagesetup(){
 		if(get_plugin_setting("show_in_header", "language_selector") == "yes"){
 			elgg_extend_view("page_elements/header_contents", "language_selector/default");
 		}
 	}
 	
+	// register hooks
+	register_plugin_hook("action", "admin/plugins/enable", "language_selector_actions_hook");
+	register_plugin_hook("action", "admin/plugins/disable", "language_selector_actions_hook");
+	register_plugin_hook("action", "admin/plugins/enableall", "language_selector_actions_hook");
+	register_plugin_hook("action", "admin/plugins/disableall", "language_selector_actions_hook");
+	register_plugin_hook("action", "plugins/settings/save", "language_selector_actions_hook");
+	
+	// register events
+	register_elgg_event_handler("language:merge", "translation_editor", "language_selector_language_merge_event");
+	
 	// Default event handlers for plugin functionality
 	register_elgg_event_handler('plugins_boot', 'system', 'language_selector_plugins_boot');
 	register_elgg_event_handler('pagesetup', 'system', 'language_selector_pagesetup');
+	register_elgg_event_handler('init', 'system', 'language_selector_init');
 	
 	// actions
 	register_action('language_selector/change', false, dirname(__FILE__) . '/actions/change.php');
