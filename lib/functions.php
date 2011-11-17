@@ -3,7 +3,7 @@
 	function language_selector_get_allowed_translations(){
 		
 		$configured_allowed = get_plugin_setting("allowed_languages", "language_selector");
-		var_dump($configured_allowed);
+		
 		if(empty($configured_allowed)){
 			$allowed = array("en");
 			
@@ -33,14 +33,12 @@
 				}
 			}
 			
-			var_dump($allowed);
-			
 			set_plugin_setting("allowed_languages", implode(",", $allowed), "language_selector");
 			
 		} else {
 			$allowed = string_to_tag_array($configured_allowed);
 		}
-	var_dump($allowed);
+
 		return $allowed;
 	}
 	
