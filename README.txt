@@ -27,11 +27,13 @@ Check the admin settings of the plugin for things to configure
 
 == 3. Version History ==
 
-x.x:
+1.1 (2011-11-29):
 
 - fixed: language completeness is now aware of translation_editor
 - fixed: some plugin settings were not loaded correctly is some situations
 - changed: moved some functions out of start.php
+- changed: moved header extension to pagesetup
+- changed: available languages are now cached (saving a lot of performance)
 
 1.0.6 (2011-09-29):
 
