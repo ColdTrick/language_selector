@@ -7,10 +7,9 @@
 	if(count($allowed) > 1){
 		// show text or flags
 		$show_flags = false;
-		if(get_plugin_setting("show_images", "language_selector") == "yes"){
+		if(elgg_get_plugin_setting("show_images", "language_selector") != "no"){
 			$show_flags = true;
 		}
-		
 		foreach($allowed as $lang_id){
 			$lang_name = elgg_echo($lang_id);
 			$text = "";
@@ -21,7 +20,7 @@
 			}
 			 
 			if($current_lang_id != $lang_id){
-				if(isloggedin()){
+				if(elgg_is_logged_in()){
 					$action = elgg_add_action_tokens_to_url($vars['url'] . "action/language_selector/change?lang_id=" . $lang_id);
 				} else {
 					
@@ -48,8 +47,10 @@
 				$result .= $text;	
 			}				
 		}
+		
+		$result = "<div class='language_selector'>" . $result . "</div>";
 
-		if(!isloggedin()){
+		if(!elgg_is_logged_in()){
 ?>
 		<script type="text/javascript">
 			function setLanguage(lang_id){
