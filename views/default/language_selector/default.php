@@ -10,6 +10,8 @@
 		if(elgg_get_plugin_setting("show_images", "language_selector") != "no"){
 			$show_flags = true;
 		}
+		$result = "";
+		
 		foreach($allowed as $lang_id){
 			$lang_name = elgg_echo($lang_id);
 			$text = "";
