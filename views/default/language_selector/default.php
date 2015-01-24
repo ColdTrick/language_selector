@@ -23,7 +23,7 @@
 			 
 			if($current_lang_id != $lang_id){
 				if(elgg_is_logged_in()){
-					$action = elgg_add_action_tokens_to_url($vars['url'] . "action/language_selector/change?lang_id=" . $lang_id);
+					$action = elgg_add_action_tokens_to_url(elgg_get_site_url() . "action/language_selector/change?lang_id=" . $lang_id);
 				} else {
 					
 					$action = "javascript:setLanguage(\"" . $lang_id . "\");";
@@ -35,7 +35,7 @@
 				$flag_file = "mod/language_selector/_graphics/flags/" . $lang_id . ".gif";
 				
 				if(file_exists($CONFIG->path . $flag_file)){
-					$text = "<img src='" . $vars["url"] . $flag_file . "' alt='" . $lang_name . "' title='" . $lang_name . "'>";
+					$text = "<img src='" . elgg_get_site_url() . $flag_file . "' alt='" . $lang_name . "' title='" . $lang_name . "'>";
 				}
 			}
 			
