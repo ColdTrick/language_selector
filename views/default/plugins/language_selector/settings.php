@@ -1,10 +1,10 @@
 <?php 
-	$yesno_options = array(
-			"yes" => elgg_echo("option:yes"),
-			"no" => elgg_echo("option:no")
-	);
-	
-	$noyes_options = array_reverse($yesno_options);
+$yesno_options = array(
+	"yes" => elgg_echo("option:yes"),
+	"no" => elgg_echo("option:no")
+);
+
+$noyes_options = array_reverse($yesno_options);
 	
 ?>
 <table>
