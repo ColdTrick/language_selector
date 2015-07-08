@@ -1,4 +1,14 @@
 = Version History =
+
+2.0.1 (2015-07-08):
+
+- changed: code style fixes
+- changed: Update and rename README.txt to README.md
+- fixed: line endings
+- fixed: 'deprecated' warnings
+- fixed: minor fixes (based on PHP notices)
+- fixed: only allow language to change to an allowed language
+
 2.0 (2012-03-16):
 
 - added: plugin now Elgg 1.8 compatible
