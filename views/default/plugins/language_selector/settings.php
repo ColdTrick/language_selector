@@ -18,6 +18,14 @@ $noyes_options = array_reverse($yesno_options);
 	</tr>
 	<tr>
 		<td>
+			<?php echo elgg_echo("language_selector:admin:settings:force_languages"); ?><br />
+		</td>
+		<td>
+			<?php echo elgg_view("input/text", array("name" => "params[force_languages]", "value" => $vars['entity']->force_languages, "size" => 200, "maxlength" => 200)); ?>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<?php echo elgg_echo('language_selector:admin:settings:show_in_header'); ?>
 		</td>
 		<td>
