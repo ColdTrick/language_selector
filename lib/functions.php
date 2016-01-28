@@ -10,8 +10,12 @@
  * @return array
  */
 function language_selector_get_allowed_translations() {
-	
-	$configured_allowed = elgg_get_plugin_setting("allowed_languages", "language_selector");
+	$forced_languages = elgg_get_plugin_setting("force_languages", "language_selector");
+	if (empty($forced_languages)) {
+		$configured_allowed = elgg_get_plugin_setting("allowed_languages", "language_selector");
+	} else {
+		$configured_allowed = $forced_languages;
+	}
 	
 	if (empty($configured_allowed)) {
 		$allowed = array("en");
