@@ -17,5 +17,6 @@ Notes
 -----
 
 * To add a language selector in a custom position, use ``elgg_view('language_selector/default')``
+* To display a language selector with a dropdown, use ``elgg_view('language_selector/dropdown')``
 * To add a custom language icon or replace an existing one, add an image file (svg, jpg, png, gif) in your plugin
 under `/views/default/language_selector/flags/$language_code.$ext`.
