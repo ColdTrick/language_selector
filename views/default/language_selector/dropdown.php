@@ -17,9 +17,14 @@ if (elgg_get_plugin_setting("show_images", "language_selector") != "no") {
 
 $options = [];
 
+$toggle_text = elgg_echo('language_selector:change');
+
 foreach ($allowed as $lang_id) {
 	$lang_name = elgg_echo($lang_id);
-	$text = $lang_id;
+
+	$text = elgg_format_element('span', [
+		'language-selector-label'
+			], $lang_name);
 
 	if ($show_flags) {
 		$flag_view = false;
@@ -31,17 +36,19 @@ foreach ($allowed as $lang_id) {
 			}
 		}
 		if ($flag_view) {
-			$text = elgg_view('output/img', [
+			$icon = elgg_view('output/img', [
 				'src' => elgg_get_simplecache_url($flag_view),
 				'alt' => $lang_name,
 				'class' => 'language-selector-flag-icon',
 			]);
+			$text = $icon . $text;
 		}
 	}
 
-	$class = ['language-selector-toggle'];
+	$class = ['language-selector-language-option'];
 	if ($current_lang_id == $lang_id) {
 		$class[] = 'elgg-state-selected';
+		$toggle_text = $text;
 	}
 
 	$options[] = elgg_view('output/url', [
@@ -54,6 +61,20 @@ foreach ($allowed as $lang_id) {
 	]);
 }
 
+
+$selector = elgg_view('output/url', [
+	'text' => $toggle_text,
+	'href' => '#language-selector-popup',
+	'title' => elgg_echo('language_selector:change'),
+	'rel' => 'popup',
+	'class' => 'language-selector-language-option language-selector-popup-trigger',
+]);
+
+$selector .= elgg_format_element('div', [
+	'id' => 'language-selector-popup',
+	'class' => 'language-selector-dropdown elgg-module-dropdown hidden',
+		], implode('', $options));
+
 echo elgg_format_element('div', [
 	'class' => 'language_selector',
-		], implode(' | ', $options));
+], $selector);
