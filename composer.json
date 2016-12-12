@@ -15,6 +15,6 @@
 		"coldtrick/sniffs": "dev-master"
 	},
 	"conflict": {
-		"elgg/elgg": "<1.8"
+		"elgg/elgg": "<2.0"
 	}
 }
