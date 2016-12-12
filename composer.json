@@ -1,8 +1,20 @@
 {
-    "name": "coldtrick/language_selector",
-    "type": "elgg-plugin",
-    "require": {
-        "composer/installers": ">=1.0.8"
-    },
-    "license": "GPL-2.0"
+	"name": "coldtrick/language_selector",
+	"description": "Provides a selector for users to easily change the language",
+	"type": "elgg-plugin",
+	"keywords": ["elgg", "plugin", "i18n"],
+	"license": "GPL-2.0",
+	"support": {
+		"source": "https://github.com/ColdTrick/language_selector",
+		"issues": "https://github.com/ColdTrick/language_selector/issues"
+	},
+	"require": {
+		"composer/installers": "^1.0.8"
+	},
+	"require-dev": {
+		"coldtrick/sniffs": "dev-master"
+	},
+	"conflict": {
+		"elgg/elgg": "<1.8"
+	}
 }
