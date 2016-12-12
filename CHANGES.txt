@@ -1,6 +1,14 @@
 Version history
 ===============
 
+3.0 (2016-12-12):
+
+- added: plugin id to manifest
+- added: a view to add selector as a dropdown
+- changed: Elgg version requirement set to 2.0
+- changed: moves JS to AMD, moves flags to simplecache
+- fixed: some minor translation + encoding issue
+
 2.0.1 (2015-07-08):
 
 - changed: code style fixes
