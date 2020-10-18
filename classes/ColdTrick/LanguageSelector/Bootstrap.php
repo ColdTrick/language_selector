@@ -2,16 +2,30 @@
 
 namespace ColdTrick\LanguageSelector;
 
+use Elgg\Includer;
 use Elgg\DefaultPluginBootstrap;
 
 class Bootstrap extends DefaultPluginBootstrap {
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function getRoot() {
+		return $this->plugin->getPath();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function load() {
+		Includer::requireFileOnce($this->getRoot() . '/lib/functions.php');
+	}
 	
 	/**
 	 * {@inheritdoc}
 	 */
 	public function boot() {
 		$this->setLoggedOutUserLanguages();
-		
 	}
 	
 	/**
@@ -47,14 +61,14 @@ class Bootstrap extends DefaultPluginBootstrap {
 	protected function registerEvents() {
 		$event = $this->elgg()->events;
 		
-		$event->registerHandler('language:merge', 'translation_editor', __NAMESPACE__ . '\Settings::invalidateSetting');
-		$event->registerHandler('all', 'plugin', __NAMESPACE__ . '\Settings::invalidateSetting');
+		$event->registerHandler('language:merge', 'translation_editor', [Settings::class, 'invalidateSetting']);
+		$event->registerHandler('all', 'plugin', [Settings::class, 'invalidateSetting']);
 	}
 	
 	protected function registerHooks() {
 		$hooks = $this->elgg()->hooks;
 		
-		$hooks->registerHandler('all', 'plugin', __NAMESPACE__ . '\Settings::invalidateSetting');
+		$hooks->registerHandler('all', 'plugin', [Settings::class, 'invalidateSetting']);
 	}
 	
 	/**
@@ -64,21 +78,8 @@ class Bootstrap extends DefaultPluginBootstrap {
 		if (elgg_is_logged_in()) {
 			return;
 		}
-
-		if (!empty($_COOKIE['client_language'])) {
-			// switched with language selector
-			$new_lang = $_COOKIE['client_language'];
-		} else {
-			$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-
-			if (!empty($browserlang)) {
-				// autodetect language
-
-				if ((bool)elgg_get_plugin_setting('autodetect', 'language_selector')) {
-					$new_lang = $browserlang;
-				}
-			}
-		}
+		
+		$new_lang = elgg()->translator->detectLanguage();
 
 		$current_language = elgg()->translator->getCurrentLanguage();
 		if (!empty($new_lang) && ($new_lang !== $current_language)) {

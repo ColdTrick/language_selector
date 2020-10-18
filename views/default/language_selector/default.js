@@ -18,7 +18,7 @@ define(function (require) {
 
 		if (!elgg.is_logged_in()) {
 			e.preventDefault();
-			elgg.session.cookie('client_language', $elem.data('language'), {expires: 30});
+			elgg.session.cookie('language', $elem.data('language'), {expires: 30});
 			elgg.forward(document.location.href);
 		}
 	});

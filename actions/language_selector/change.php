@@ -5,13 +5,16 @@ $installed = get_installed_translations();
 
 if (!empty($new_lang_id) && array_key_exists($new_lang_id, $installed)) {
 	if ($user = elgg_get_logged_in_user_entity()) {
-		
 		$user->language = $new_lang_id;
 		$user->save();
 		
 		// let other plugins know we updated the language
 		elgg_trigger_event('update', 'language', $user);
-	}	
+	} else {
+		$cookie = new \ElggCookie('language');
+		$cookie->value = $new_lang_id;
+		elgg_set_cookie($cookie);
+	}
 }
 
 return elgg_ok_response('');

@@ -22,14 +22,6 @@ echo elgg_view_field([
 		],
 		[
 			'#type' => 'checkbox',
-			'#label' => elgg_echo('language_selector:admin:settings:autodetect'),
-			'name' => 'params[autodetect]',
-			'checked' => (bool) $entity->autodetect,
-			'switch' => true,
-			'value' => 1,
-		],
-		[
-			'#type' => 'checkbox',
 			'#label' => elgg_echo('language_selector:admin:settings:show_images'),
 			'name' => 'params[show_images]',
 			'checked' => (bool) $entity->show_images,
