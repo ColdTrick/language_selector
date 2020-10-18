@@ -3,8 +3,8 @@
 	<id>language_selector</id>
 	<name>Language Selector</name>
 	<author>ColdTrick IT Solutions</author>
-	<version>3.1</version>
-	<description>Provides a selector for users to easily change the language. Updated version for Elgg 3.x compatibility.</description>
+	<version>3.0</version>
+	<description>Provides a selector for users to easily change the language.</description>
 	<website>http://www.coldtrick.com/</website>
 	<copyright>(C) ColdTrick IT Solutions 2009 - 2012</copyright>
 	<license>GNU Public License version 2</license>
