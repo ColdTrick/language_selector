@@ -11,7 +11,7 @@ elgg_require_js('language_selector/default');
 
 // show text or flags
 $show_flags = false;
-if (elgg_get_plugin_setting("show_images", "language_selector") != "no") {
+if ((bool)elgg_get_plugin_setting('show_images', 'language_selector')) {
 	$show_flags = true;
 }
 
@@ -46,14 +46,15 @@ foreach ($allowed as $lang_id) {
 
 	$options[] = elgg_view('output/url', [
 		'text' => $text,
-		'href' => "action/language_selector/change?lang_id=$lang_id",
+		'href' => elgg_generate_action_url('language_selector/change', [
+			'lang_id' => $lang_id,
+		]),
 		'class' => $class,
 		'title' => $lang_name,
-		'is_action' => true,
 		'data-language' => $lang_id,
 	]);
 }
 
 echo elgg_format_element('div', [
 	'class' => 'language_selector',
-		], implode(' | ', $options));
+], implode(' | ', $options));
