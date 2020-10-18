@@ -11,7 +11,7 @@ elgg_require_js('language_selector/default');
 
 // show text or flags
 $show_flags = false;
-if (elgg_get_plugin_setting("show_images", "language_selector") != "no") {
+if ((bool)elgg_get_plugin_setting('show_images', 'language_selector')) {
 	$show_flags = true;
 }
 
@@ -22,9 +22,7 @@ $toggle_text = elgg_echo('language_selector:change');
 foreach ($allowed as $lang_id) {
 	$lang_name = elgg_echo($lang_id);
 
-	$text = elgg_format_element('span', [
-		'language-selector-label'
-			], $lang_name);
+	$text = elgg_format_element('span', ['class' => 'language-selector-label'], $lang_name);
 
 	if ($show_flags) {
 		$flag_view = false;
@@ -53,14 +51,14 @@ foreach ($allowed as $lang_id) {
 
 	$options[] = elgg_view('output/url', [
 		'text' => $text,
-		'href' => "action/language_selector/change?lang_id=$lang_id",
+		'href' => elgg_generate_action_url('language_selector/change', [
+			'lang_id' => $lang_id,
+		]),
 		'class' => $class,
 		'title' => $lang_name,
-		'is_action' => true,
 		'data-language' => $lang_id,
 	]);
 }
-
 
 $selector = elgg_view('output/url', [
 	'text' => $toggle_text,
@@ -68,12 +66,16 @@ $selector = elgg_view('output/url', [
 	'title' => elgg_echo('language_selector:change'),
 	'rel' => 'popup',
 	'class' => 'language-selector-language-option language-selector-popup-trigger',
+	'data-position' => json_encode([
+		'my' => 'right top',
+		'at' => 'right bottom',
+	]),
 ]);
 
 $selector .= elgg_format_element('div', [
 	'id' => 'language-selector-popup',
 	'class' => 'language-selector-dropdown elgg-module-dropdown hidden',
-		], implode('', $options));
+], implode('', $options));
 
 echo elgg_format_element('div', [
 	'class' => 'language_selector',
